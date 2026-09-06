@@ -36,6 +36,10 @@
 
   <!-- HERO -->
   <section class="hero container" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="hero-blob hero-blob-a"></span>
+      <span class="hero-blob hero-blob-b"></span>
+    </div>
     <div class="hero-eyebrow reveal">
       <span class="pulse-dot" aria-hidden="true"></span>
       Open for fractional leadership, consulting &amp; select full-time roles
@@ -63,13 +67,23 @@
 
   <!-- LOGOS / DOMAINS STRIP -->
   <section class="domains-strip reveal" aria-label="Domains of expertise">
-    <div class="container domains-track">
-      <span>DeFi &amp; Blockchain Infra</span>
-      <span>HIPAA-Compliant Healthcare</span>
-      <span>Enterprise DevOps</span>
-      <span>AWS · Azure · GCP</span>
-      <span>CI/CD at Scale</span>
-      <span>24×7 Production Ops</span>
+    <div class="domains-marquee">
+      <div class="domains-track">
+        <span>DeFi &amp; Blockchain Infra</span>
+        <span>HIPAA-Compliant Healthcare</span>
+        <span>Enterprise DevOps</span>
+        <span>AWS · Azure · GCP</span>
+        <span>CI/CD at Scale</span>
+        <span>24×7 Production Ops</span>
+      </div>
+      <div class="domains-track" aria-hidden="true">
+        <span>DeFi &amp; Blockchain Infra</span>
+        <span>HIPAA-Compliant Healthcare</span>
+        <span>Enterprise DevOps</span>
+        <span>AWS · Azure · GCP</span>
+        <span>CI/CD at Scale</span>
+        <span>24×7 Production Ops</span>
+      </div>
     </div>
   </section>
 
@@ -77,27 +91,27 @@
   <section class="impact container" id="impact">
     <h2 class="section-kicker reveal">Impact, in numbers</h2>
     <div class="impact-grid">
-      <div class="impact-card reveal">
+      <div class="impact-card reveal spotlight">
         <div class="impact-number" data-count="20" data-suffix="+">0</div>
         <div class="impact-label">Years leading engineering &amp; delivery</div>
       </div>
-      <div class="impact-card reveal">
+      <div class="impact-card reveal spotlight">
         <div class="impact-number" data-count="14" data-prefix="$" data-suffix="M">0</div>
         <div class="impact-label">Portfolio revenue delivered (6 projects, 2 yrs)</div>
       </div>
-      <div class="impact-card reveal">
+      <div class="impact-card reveal spotlight">
         <div class="impact-number" data-count="130" data-suffix="+">0</div>
         <div class="impact-label">Engineers led across concurrent programs</div>
       </div>
-      <div class="impact-card reveal">
+      <div class="impact-card reveal spotlight">
         <div class="impact-number" data-count="99.9" data-suffix="%">0</div>
         <div class="impact-label">Production uptime maintained</div>
       </div>
-      <div class="impact-card reveal">
+      <div class="impact-card reveal spotlight">
         <div class="impact-number" data-count="60" data-suffix="%">0</div>
         <div class="impact-label">MTTR reduction via PagerDuty &amp; runbook automation</div>
       </div>
-      <div class="impact-card reveal">
+      <div class="impact-card reveal spotlight">
         <div class="impact-number" data-count="40" data-suffix="%">0</div>
         <div class="impact-label">Productivity gain from process automation</div>
       </div>
@@ -128,7 +142,7 @@
           for an organization that needs someone who has actually run the 3am incident call.
         </p>
       </div>
-      <aside class="about-card reveal">
+      <aside class="about-card reveal spotlight">
         <h3>Engagement models</h3>
         <ul class="engagement-list">
           <li>
@@ -239,51 +253,51 @@
     </div>
 
     <div class="skills-grid">
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Cloud Platforms</h4>
         <p>AWS, Azure, Google Cloud</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>CI/CD &amp; Orchestration</h4>
         <p>Jenkins, TeamCity</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Infrastructure as Code</h4>
         <p>Ansible, Puppet</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Containerization</h4>
         <p>Docker, Vagrant</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Monitoring &amp; Observability</h4>
         <p>Nagios, New Relic, Datadog, Site24x7</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Programming &amp; Scripting</h4>
         <p>Java/J2EE, Python, Shell, Ruby</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Build &amp; Code Analysis</h4>
         <p>Maven, Ant, SonarQube</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Code Management</h4>
         <p>Git, SVN, CVS</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>PM &amp; ITSM</h4>
         <p>JIRA, Rally, ServiceNow, PagerDuty, MS Project, VersionOne</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Automation &amp; Testing</h4>
         <p>Rundeck, Selenium</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Incident Management</h4>
         <p>PagerDuty, Runbook Automation</p>
       </div>
-      <div class="skill-card reveal">
+      <div class="skill-card reveal spotlight">
         <h4>Databases</h4>
         <p>Relational / SQL</p>
       </div>
@@ -295,7 +309,7 @@
     <div class="credentials-grid">
       <div class="reveal">
         <h2 class="section-title">Education</h2>
-        <div class="credential-item">
+        <div class="credential-item spotlight">
           <strong>B.Tech, Computer Science &amp; Engineering</strong>
           <span>Koneru Lakshmaiah College of Engineering (KL University), Andhra Pradesh — 2001–2005</span>
         </div>

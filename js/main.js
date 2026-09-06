@@ -59,6 +59,30 @@ const countObserver = new IntersectionObserver(
 );
 countEls.forEach((el) => countObserver.observe(el));
 
+// Spotlight cursor-glow on cards
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.spotlight').forEach((el) => {
+  el.addEventListener('mousemove', (e) => {
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--x', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--y', `${e.clientY - rect.top}px`);
+  });
+});
+
+// Timeline scroll-linked progress line
+const timelineEl = document.querySelector('.timeline');
+if (timelineEl && !reduceMotion) {
+  const updateTimelineProgress = () => {
+    const rect = timelineEl.getBoundingClientRect();
+    const total = rect.height + window.innerHeight * 0.5;
+    const scrolled = window.innerHeight * 0.7 - rect.top;
+    const progress = Math.min(Math.max(scrolled / total, 0), 1);
+    timelineEl.style.setProperty('--progress', progress.toFixed(3));
+  };
+  window.addEventListener('scroll', updateTimelineProgress, { passive: true });
+  updateTimelineProgress();
+}
+
 // Contact form -> mailto (no backend/service configured)
 const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e) => {
