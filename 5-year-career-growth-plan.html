@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5-Year PM Career Growth Plan</title>
+  <style>
+    :root {
+      --bg:#0f1117; --surface:#1a1d27; --surface-2:#222638;
+      --border:#2e3348; --text:#e2e8f0; --text-muted:#8892a4; --text-dim:#5a6478;
+      --y1:#6c8cff; --y2:#4ecdc4; --y3:#ff6b6b; --y4:#ffd93d; --y5:#a8e6cf;
+    }
+    body.light {
+      --bg:#f4f6fb; --surface:#ffffff; --surface-2:#f0f2f7;
+      --border:#dde1ec; --text:#1a1d27; --text-muted:#5a6478; --text-dim:#8892a4;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; transition:background .3s,color .3s; }
+    .site-header { background:linear-gradient(135deg,#0d0f1a 0%,#1a1d2e 50%,#0d1420 100%); border-bottom:1px solid var(--border); padding:60px 40px 50px; text-align:center; position:relative; overflow:hidden; }
+    body.light .site-header { background:linear-gradient(135deg,#1a3a6b 0%,#2563eb 50%,#0f2855 100%); }
+    .site-header::before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(108,140,255,.12) 0%,transparent 70%); pointer-events:none; }
+    .header-label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--y1); margin-bottom:16px; }
+    .site-header h1 { font-size:clamp(28px,5vw,52px); font-weight:800; letter-spacing:-1px; line-height:1.1; margin-bottom:16px; color:#fff; }
+    .site-header h1 span { background:linear-gradient(90deg,var(--y1),var(--y2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .subtitle { color:rgba(255,255,255,.75); font-size:17px; max-width:560px; margin:0 auto 32px; }
+    .header-meta { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; }
+    .header-meta-item .value { font-size:24px; font-weight:700; color:var(--y2); }
+    .header-meta-item .label { font-size:12px; color:rgba(255,255,255,.6); text-transform:uppercase; letter-spacing:1px; }
+    .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+    .nav-bar { background:var(--surface); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; transition:background .3s; }
+    .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; gap:0; overflow-x:auto; scrollbar-width:none; align-items:center; }
+    .nav-inner::-webkit-scrollbar { display:none; }
+    .nav-tab { padding:16px 18px; font-size:13px; font-weight:600; color:var(--text-muted); cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap; transition:color .2s,border-color .2s; background:none; border-top:none; border-left:none; border-right:none; }
+    .nav-tab:hover { color:var(--text); }
+    .nav-tab.active { color:var(--text); }
+    .nav-tab[data-tab="overview"].active { border-color:var(--y1); }
+    .nav-tab[data-tab="y1"].active { border-color:var(--y1); }
+    .nav-tab[data-tab="y2"].active { border-color:var(--y2); }
+    .nav-tab[data-tab="y3"].active { border-color:var(--y3); }
+    .nav-tab[data-tab="y4"].active { border-color:var(--y4); }
+    .nav-tab[data-tab="y5"].active { border-color:var(--y5); }
+    .nav-tab[data-tab="reference"].active { border-color:var(--text-muted); }
+    .theme-toggle { margin-left:auto; padding:7px 14px; border-radius:20px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font-size:13px; cursor:pointer; white-space:nowrap; transition:background .2s,color .2s; flex-shrink:0; }
+    .theme-toggle:hover { background:var(--border); }
+    .tab-content { display:none; padding:44px 0 80px; }
+    .tab-content.active { display:block; }
+    .section-header { margin-bottom:32px; }
+    .year-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; margin-bottom:10px; }
+    .badge-y1 { background:rgba(108,140,255,.15); color:var(--y1); }
+    .badge-y2 { background:rgba(78,205,196,.15); color:var(--y2); }
+    .badge-y3 { background:rgba(255,107,107,.15); color:var(--y3); }
+    .badge-y4 { background:rgba(255,217,61,.15); color:var(--y4); }
+    .badge-y5 { background:rgba(168,230,207,.15); color:var(--y5); }
+    .badge-ref { background:rgba(142,150,180,.15); color:var(--text-muted); }
+    .section-header h2 { font-size:clamp(22px,4vw,36px); font-weight:800; letter-spacing:-.5px; line-height:1.15; margin-bottom:8px; }
+    .section-header .theme { color:var(--text-muted); font-size:15px; font-style:italic; }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:20px; transition:background .3s; }
+    .card-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .card-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+    .card h3 { font-size:16px; font-weight:700; }
+    .card-sub { font-size:13px; color:var(--text-muted); margin-top:2px; }
+    .milestone { border-radius:12px; padding:22px 26px; margin-bottom:20px; border-left:4px solid; }
+    .milestone.y1 { border-left-color:var(--y1); background:rgba(108,140,255,.07); }
+    .milestone.y2 { border-left-color:var(--y2); background:rgba(78,205,196,.07); }
+    .milestone.y3 { border-left-color:var(--y3); background:rgba(255,107,107,.07); }
+    .milestone.y4 { border-left-color:var(--y4); background:rgba(255,217,61,.07); }
+    .milestone.y5 { border-left-color:var(--y5); background:rgba(168,230,207,.07); }
+    .milestone-label { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+    .milestone.y1 .milestone-label { color:var(--y1); }
+    .milestone.y2 .milestone-label { color:var(--y2); }
+    .milestone.y3 .milestone-label { color:var(--y3); }
+    .milestone.y4 .milestone-label { color:var(--y4); }
+    .milestone.y5 .milestone-label { color:var(--y5); }
+    .milestone h4 { font-size:15px; font-weight:700; margin-bottom:6px; }
+    .milestone p { color:var(--text-muted); font-size:14px; line-height:1.6; }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+    .four-col { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:20px; }
+    @media(max-width:800px) { .four-col { grid-template-columns:1fr 1fr; } }
+    @media(max-width:600px) { .two-col { grid-template-columns:1fr; } .four-col { grid-template-columns:1fr; } }
+    .table-wrap { overflow-x:auto; margin-bottom:20px; border-radius:10px; border:1px solid var(--border); }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    thead { background:var(--surface-2); }
+    th { padding:11px 14px; text-align:left; font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--text-muted); white-space:nowrap; }
+    td { padding:12px 14px; border-top:1px solid var(--border); color:var(--text); vertical-align:top; }
+    tr:hover td { background:rgba(255,255,255,.02); }
+    body.light tr:hover td { background:rgba(0,0,0,.02); }
+    td.muted { color:var(--text-muted); }
+    td.num { color:var(--text-dim); font-weight:600; font-size:13px; }
+    td.y1c { color:var(--y1); font-weight:600; } td.y2c { color:var(--y2); font-weight:600; }
+    td.y3c { color:var(--y3); font-weight:600; } td.y4c { color:var(--y4); font-weight:600; }
+    td.y5c { color:var(--y5); font-weight:600; }
+    .q-card { background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:18px; }
+    .q-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; }
+    .q-title { font-size:15px; font-weight:700; margin-bottom:8px; }
+    .q-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .q-list li { font-size:13px; color:var(--text-muted); display:flex; gap:8px; line-height:1.4; }
+    .q-list li::before { content:"▸"; flex-shrink:0; }
+    .checkpoint { background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:22px; margin-bottom:20px; }
+    .checkpoint h4 { font-size:15px; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+    .checkpoint h4::before { content:"✓"; width:24px; height:24px; background:rgba(108,140,255,.15); color:var(--y1); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0; }
+    .checklist { list-style:none; display:flex; flex-direction:column; gap:8px; }
+    .checklist li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--text-muted); line-height:1.5; }
+    .checklist li::before { content:""; width:16px; height:16px; border:2px solid var(--border); border-radius:3px; flex-shrink:0; margin-top:2px; }
+    .arc-timeline { display:flex; margin-bottom:28px; border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+    .arc-year { flex:1; padding:18px 12px; text-align:center; border-right:1px solid var(--border); cursor:pointer; transition:background .2s; }
+    .arc-year:last-child { border-right:none; }
+    .arc-year:hover { background:rgba(255,255,255,.03); }
+    body.light .arc-year:hover { background:rgba(0,0,0,.03); }
+    .arc-year .yr { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:5px; }
+    .arc-year .theme-short { font-size:13px; font-weight:700; margin-bottom:3px; }
+    .arc-year .title-target { font-size:11px; color:var(--text-muted); }
+    .arc-year.y1 .yr { color:var(--y1); } .arc-year.y2 .yr { color:var(--y2); }
+    .arc-year.y3 .yr { color:var(--y3); } .arc-year.y4 .yr { color:var(--y4); }
+    .arc-year.y5 .yr { color:var(--y5); }
+    @media(max-width:600px) { .arc-timeline { flex-direction:column; } .arc-year { border-right:none; border-bottom:1px solid var(--border); } .arc-year:last-child { border-bottom:none; } }
+    .pill { display:inline-block; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+    .pill-y1 { background:rgba(108,140,255,.15); color:var(--y1); } .pill-y2 { background:rgba(78,205,196,.15); color:var(--y2); }
+    .pill-y3 { background:rgba(255,107,107,.15); color:var(--y3); } .pill-y4 { background:rgba(255,217,61,.15); color:var(--y4); }
+    .pill-y5 { background:rgba(168,230,207,.15); color:var(--y5); }
+    .divider { border:none; border-top:1px solid var(--border); margin:28px 0; }
+    .tracker-row { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-top:1px solid var(--border); }
+    .tracker-row:first-child { border-top:none; }
+    .tracker-num { width:26px; height:26px; border:2px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--text-dim); flex-shrink:0; margin-top:1px; }
+    .tracker-body { flex:1; }
+    .tracker-body strong { font-size:13px; display:block; margin-bottom:3px; }
+    .tracker-body span { font-size:12px; color:var(--text-muted); }
+    .tracker-date { font-size:11px; color:var(--text-dim); white-space:nowrap; margin-top:3px; }
+    h4.subhead { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--text-muted); margin-bottom:10px; }
+    footer { border-top:1px solid var(--border); padding:32px 24px; text-align:center; font-size:13px; color:var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-label">Career Growth Framework</div>
+  <h1>5-Year Plan: <span>Program Manager</span></h1>
+  <p class="subtitle">From mid-level PM to Director or VP of Program Management in the technology sector.</p>
+  <div class="header-meta">
+    <div class="header-meta-item"><div class="value">5</div><div class="label">Years</div></div>
+    <div class="header-meta-item"><div class="value">60</div><div class="label">Monthly Actions</div></div>
+    <div class="header-meta-item"><div class="value">20</div><div class="label">Quarterly Milestones</div></div>
+    <div class="header-meta-item"><div class="value">Director/VP</div><div class="label">Target Level</div></div>
+  </div>
+</header>
+
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <button class="nav-tab active" data-tab="overview">Overview</button>
+    <button class="nav-tab" data-tab="y1">Year 1 — Skills</button>
+    <button class="nav-tab" data-tab="y2">Year 2 — Visibility</button>
+    <button class="nav-tab" data-tab="y3">Year 3 — Leadership</button>
+    <button class="nav-tab" data-tab="y4">Year 4 — Positioning</button>
+    <button class="nav-tab" data-tab="y5">Year 5 — Target Role</button>
+    <button class="nav-tab" data-tab="reference">Reference</button>
+    <button class="theme-toggle" onclick="toggleTheme()">☀️ Light</button>
+  </div>
+</nav>
+
+<section class="tab-content active" id="tab-overview">
+  <div class="container">
+    <div class="section-header">
+      <div class="year-badge badge-ref">Strategic Overview</div>
+      <h2>The Five-Year Arc</h2>
+      <p class="theme">Each year has one primary theme. The themes compound — skip one and the next is harder.</p>
+    </div>
+
+    <div class="arc-timeline">
+      <div class="arc-year y1" onclick="switchTab('y1')">
+        <div class="yr">Year 1</div><div class="theme-short">Skill Investments</div><div class="title-target">Mid-level PM</div>
+      </div>
+      <div class="arc-year y2" onclick="switchTab('y2')">
+        <div class="yr">Year 2</div><div class="theme-short">Visibility Projects</div><div class="title-target">Senior PM</div>
+      </div>
+      <div class="arc-year y3" onclick="switchTab('y3')">
+        <div class="yr">Year 3</div><div class="theme-short">Leadership Expansion</div><div class="title-target">Senior / Principal PM</div>
+      </div>
+      <div class="arc-year y4" onclick="switchTab('y4')">
+        <div class="yr">Year 4</div><div class="theme-short">Industry Positioning</div><div class="title-target">Director-track</div>
+      </div>
+      <div class="arc-year y5" onclick="switchTab('y5')">
+        <div class="yr">Year 5</div><div class="theme-short">Target Role</div><div class="title-target">Director / VP</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Year</th><th>Theme</th><th>Comp Target</th><th>Title Target</th></tr></thead>
+            <tbody>
+              <tr><td><span class="pill pill-y1">Y1</span></td><td class="y1c">Skill Investments</td><td class="muted">50th percentile</td><td class="muted">Mid-level PM</td></tr>
+              <tr><td><span class="pill pill-y2">Y2</span></td><td class="y2c">Visibility Projects</td><td class="muted">65th–75th percentile</td><td class="muted">Senior PM</td></tr>
+              <tr><td><span class="pill pill-y3">Y3</span></td><td class="y3c">Leadership Expansion</td><td class="muted">75th–80th percentile</td><td class="muted">Senior / Principal PM</td></tr>
+              <tr><td><span class="pill pill-y4">Y4</span></td><td class="y4c">Industry Positioning</td><td class="muted">Director comp floor</td><td class="muted">Director-track</td></tr>
+              <tr><td><span class="pill pill-y5">Y5</span></td><td class="y5c">Target Role</td><td class="muted">Director/VP median</td><td class="muted">Director / VP</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-header">
+          <div class="card-icon" style="background:rgba(108,140,255,.15);">🎯</div>
+          <div><h3>Five Promises</h3><div class="card-sub">What this plan commits to delivering</div></div>
+        </div>
+        <ul class="checklist">
+          <li><span>Close critical skill gaps in <strong>Year 1</strong> to build a competitive foundation</span></li>
+          <li><span>Deliver <strong>measurable, documented impact</strong> on a high-visibility project by Year 2</span></li>
+          <li><span>Expand from execution to <strong>portfolio and people leadership</strong> by Year 3</span></li>
+          <li><span>Achieve <strong>recognized external presence</strong> through thought leadership by Year 4</span></li>
+          <li><span>Secure <strong>Director or VP role</strong> by end of Year 5</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <h4 class="subhead">Plan-Wide Acceptance Criteria</h4>
+    <div class="card">
+      <div class="tracker-row">
+        <div class="tracker-num">1</div>
+        <div class="tracker-body"><strong>Skills gap audit completed in Month 1 and re-scored at every annual review</strong><span>Five re-scores required across the plan</span></div>
+        <div class="tracker-date">Month 1 / Annual</div>
+      </div>
+      <div class="tracker-row">
+        <div class="tracker-num">2</div>
+        <div class="tracker-body"><strong>Cross-functional, executive-sponsored project with quantified business impact delivered</strong><span>Impact document formatted for executive audience</span></div>
+        <div class="tracker-date">End of Year 2</div>
+      </div>
+      <div class="tracker-row">
+        <div class="tracker-num">3</div>
+        <div class="tracker-body"><strong>Portfolio ownership and formal people leadership responsibilities held</strong><span>Documented development plans and outcomes for direct reports or mentees</span></div>
+        <div class="tracker-date">End of Year 3</div>
+      </div>
+      <div class="tracker-row">
+        <div class="tracker-num">4</div>
+        <div class="tracker-body"><strong>External thought leadership artifact publicly attributable</strong><span>Published piece, conference talk, or advisory role</span></div>
+        <div class="tracker-date">End of Year 4</div>
+      </div>
+      <div class="tracker-row">
+        <div class="tracker-num">5</div>
+        <div class="tracker-body"><strong>Target role secured through accepted offer or confirmed internal promotion</strong><span>Before end of five-year window</span></div>
+        <div class="tracker-date">End of Year 5</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-y1">
+  <div class="container">
+    <div class="section-header">
+      <div class="year-badge badge-y1">Year 1</div>
+      <h2>Skill Investments</h2>
+      <p class="theme">Know where you stand. Close the gaps that matter. Build the internal foundation.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(108,140,255,.15);">📅</div>
+        <div><h3>Monthly Action Plan</h3><div class="card-sub">One clear action per month — execute sequentially, do not skip.</div></div>
+      </div>
+      <div class="table-wrap"><table>
+<thead><tr><th>Month</th><th>Focus</th><th>Key Action</th></tr></thead><tbody>
+<tr><td class="num">M1</td><td class="y1c">Skills Gap Audit</td><td class="muted">Pull 10 Director/VP JDs; score yourself on 8 skill domains; identify top 3 gaps</td></tr>
+<tr><td class="num">M2</td><td class="y1c">Stakeholder Mapping</td><td class="muted">Map every decision-maker, influencer, and ally; create connection strategy for each</td></tr>
+<tr><td class="num">M3</td><td class="y1c">Secure Senior Mentor</td><td class="muted">Identify 2-level-up mentor; send structured outreach; book first monthly session</td></tr>
+<tr><td class="num">M4</td><td class="y1c">Certification Begin</td><td class="muted">Enroll in highest-signal cert (SAFe, PgMP, AWS, or Gen AI / Agentic AI); block 90 min/week study time</td></tr>
+<tr><td class="num">M5</td><td class="y1c">KPI Baseline</td><td class="muted">Define 5 personal KPIs with measurement method; document current baseline scores</td></tr>
+<tr><td class="num">M6</td><td class="y1c">Mid-Year Review</td><td class="muted">Re-score gap audit; score 5 KPIs; get written qualitative feedback from 2 seniors</td></tr>
+<tr><td class="num">M7</td><td class="y1c">Certification Progress</td><td class="muted">Complete at least 50% of cert coursework; apply learnings in a live program</td></tr>
+<tr><td class="num">M8</td><td class="y1c">Network Expansion</td><td class="muted">Add 5 internal + 2 external meaningful relationships; join 1 PM community</td></tr>
+<tr><td class="num">M9</td><td class="y1c">Executive Comms Practice</td><td class="muted">Volunteer to present at a team all-hands or program review; request feedback</td></tr>
+<tr><td class="num">M10</td><td class="y1c">Certification Complete</td><td class="muted">Pass certification exam; document achievement with evidence for promotion case</td></tr>
+<tr><td class="num">M11</td><td class="y1c">Compensation Research</td><td class="muted">Collect 3 market data sources; compare to current comp; prepare ask if gap exists</td></tr>
+<tr><td class="num">M12</td><td class="y1c">Year-End Review</td><td class="muted">Re-score all KPIs; update gap audit; complete annual checkpoint with mentor</td></tr>
+</tbody></table></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(108,140,255,.15);">🗓️</div>
+        <div><h3>Quarterly Milestones</h3><div class="card-sub">Use each quarter-end to check progress before moving forward.</div></div>
+      </div>
+      <div class="four-col"><div class="q-card">
+  <div class="q-label" style="color:var(--y1);">Q1 — Jan to Mar</div>
+  <div class="q-title">Foundation</div>
+  <ul class="q-list"><li>Skills gap audit completed by Day 30</li>
+<li>Stakeholder map drafted and shared with mentor</li>
+<li>Senior mentor secured with monthly cadence set</li>
+<li>Certification enrolled and study schedule blocked</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y1);">Q2 — Apr to Jun</div>
+  <div class="q-title">Build</div>
+  <ul class="q-list"><li>Mid-year KPI baseline established</li>
+<li>Top 2 skill gaps in active learning mode</li>
+<li>Mentor sessions ongoing; first stretch ask made</li>
+<li>First internal network connections made (+5)</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y1);">Q3 — Jul to Sep</div>
+  <div class="q-title">Deepen</div>
+  <ul class="q-list"><li>Certification ≥50% complete</li>
+<li>Applied 1 new skill in a live program</li>
+<li>External community joined; +2 external peers</li>
+<li>Presented at one team-level forum</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y1);">Q4 — Oct to Dec</div>
+  <div class="q-title">Close</div>
+  <ul class="q-list"><li>Certification exam passed</li>
+<li>All 5 KPIs scored with data, not self-assessment</li>
+<li>Compensation gap researched; ask initiated if needed</li>
+<li>Year 2 learning plan drafted with mentor</li></ul>
+</div></div>
+    </div>
+
+    <div class="milestone y1">
+      <div class="milestone-label">💰 Comp Milestone — End of Year 1</div>
+      <h4>50th Percentile, Mid-Level PM</h4>
+      <p>Confirm compensation is at or above the 50th percentile for mid-level PM in your target geography and sector. Use Levels.fyi, Glassdoor, and LinkedIn Salary. If a gap exists, request a specific meeting with market data in hand — do not wait for a review cycle.</p>
+    </div>
+
+    <div class="checkpoint">
+  <h4>Annual Review Checkpoint — Year 1</h4>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Complete within 30 days of year-end. Written outputs required.</p>
+  <ul class="checklist"><li><span>Skills gap audit re-scored — every gap documented with current status and evidence</span></li>
+<li><span>Five KPIs scored with supporting data, not self-assessment</span></li>
+<li><span>Certification completed and documented in portfolio</span></li>
+<li><span>Mentor feedback collected: written summary of mentor's readiness assessment</span></li>
+<li><span>Compensation confirmed at 50th percentile or gap documented with action plan</span></li>
+<li><span>Learning plan drafted for Year 2 with specific objectives tied to visibility goals</span></li></ul>
+</div>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-y2">
+  <div class="container">
+    <div class="section-header">
+      <div class="year-badge badge-y2">Year 2</div>
+      <h2>Visibility Projects</h2>
+      <p class="theme">Do high-impact work where senior leaders can see it. Build a body of evidence, not just a reputation.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(78,205,196,.15);">📅</div>
+        <div><h3>Monthly Action Plan</h3><div class="card-sub">One clear action per month — execute sequentially, do not skip.</div></div>
+      </div>
+      <div class="table-wrap"><table>
+<thead><tr><th>Month</th><th>Focus</th><th>Key Action</th></tr></thead><tbody>
+<tr><td class="num">M1</td><td class="y2c">Identify High-Visibility Project</td><td class="muted">Research current org initiatives; select target project with exec sponsor; prepare pitch</td></tr>
+<tr><td class="num">M2</td><td class="y2c">Secure Project Assignment</td><td class="muted">Pitch to relevant VP or sponsor; get formal or informal assignment on high-stakes program</td></tr>
+<tr><td class="num">M3</td><td class="y2c">Impact Doc: Draft</td><td class="muted">Create living impact document for every program; set quarterly update cadence</td></tr>
+<tr><td class="num">M4</td><td class="y2c">Internal Knowledge Contribution</td><td class="muted">Launch PM guild, post-mortem framework, or lunch-and-learn series — pick one</td></tr>
+<tr><td class="num">M5</td><td class="y2c">Executive Presentation #1</td><td class="muted">Volunteer for or secure one formal senior leadership presentation; prepare with mentor</td></tr>
+<tr><td class="num">M6</td><td class="y2c">Mid-Year Review</td><td class="muted">Score impact metrics; assess executive sponsor cultivation progress; adjust plan</td></tr>
+<tr><td class="num">M7</td><td class="y2c">Sponsor Cultivation</td><td class="muted">Identify executive sponsor candidate; deepen relationship through program delivery</td></tr>
+<tr><td class="num">M8</td><td class="y2c">External PM Community</td><td class="muted">Join PMI, Reforge, or PM-specific community; make 2 meaningful external connections</td></tr>
+<tr><td class="num">M9</td><td class="y2c">Executive Presentation #2</td><td class="muted">Deliver second senior presentation; collect written feedback</td></tr>
+<tr><td class="num">M10</td><td class="y2c">Promotion Case: Draft</td><td class="muted">Compile scope evidence, impact metrics, and market data into promotion document</td></tr>
+<tr><td class="num">M11</td><td class="y2c">Compensation Research</td><td class="muted">Update market data; prepare 65th–75th percentile case with sponsor signal</td></tr>
+<tr><td class="num">M12</td><td class="y2c">Year-End Review</td><td class="muted">Finalize impact portfolio; complete comp conversation; set Year 3 leadership targets</td></tr>
+</tbody></table></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(78,205,196,.15);">🗓️</div>
+        <div><h3>Quarterly Milestones</h3><div class="card-sub">Use each quarter-end to check progress before moving forward.</div></div>
+      </div>
+      <div class="four-col"><div class="q-card">
+  <div class="q-label" style="color:var(--y2);">Q1 — Jan to Mar</div>
+  <div class="q-title">Secure the Project</div>
+  <ul class="q-list"><li>High-visibility project identified and pitch prepared</li>
+<li>Assignment confirmed (formal or informal)</li>
+<li>Impact document created and first data points entered</li>
+<li>Internal knowledge initiative selected and kick-off planned</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y2);">Q2 — Apr to Jun</div>
+  <div class="q-title">Deliver & Communicate</div>
+  <ul class="q-list"><li>Internal knowledge initiative launched</li>
+<li>First executive presentation delivered</li>
+<li>Mid-year impact metrics documented with hard numbers</li>
+<li>Sponsor candidate identified; relationship deepening</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y2);">Q3 — Jul to Sep</div>
+  <div class="q-title">Build Credibility</div>
+  <ul class="q-list"><li>Executive sponsor relationship active</li>
+<li>Second executive presentation delivered</li>
+<li>External PM peer added; first benchmarking conversation done</li>
+<li>Promotion evidence gathering started</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y2);">Q4 — Oct to Dec</div>
+  <div class="q-title">Make the Ask</div>
+  <ul class="q-list"><li>Promotion business case drafted (scope + impact + market data + sponsor signal)</li>
+<li>Compensation conversation held; 65–75th percentile target stated</li>
+<li>Year 3 portfolio and people leadership goals defined</li>
+<li>External network: at least 3 meaningful peers outside employer</li></ul>
+</div></div>
+    </div>
+
+    <div class="milestone y2">
+      <div class="milestone-label">💰 Comp Milestone — End of Year 2</div>
+      <h4>65th–75th Percentile or Senior PM Promotion</h4>
+      <p>Reach the 65th–75th percentile or complete a promotion to Senior PM with a corresponding adjustment. Request a specific meeting titled "Discussion: Role and Compensation Alignment." Bring data. Frame as retention and alignment, not a complaint.</p>
+    </div>
+
+    <div class="checkpoint">
+  <h4>Annual Review Checkpoint — Year 2</h4>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Complete within 30 days of year-end. Written outputs required.</p>
+  <ul class="checklist"><li><span>Impact portfolio reviewed with mentor and executive sponsor — feedback documented verbatim</span></li>
+<li><span>External visibility assessed — professional profiles updated, external community joined</span></li>
+<li><span>Promotion or scope expansion case evaluated — status documented with reason if blocked</span></li>
+<li><span>Compensation confirmed at 65th–75th percentile or corrective action documented</span></li>
+<li><span>Year 3 leadership targets set — specific portfolio and people leadership goals defined</span></li>
+<li><span>External PM peer relationship established and first benchmarking conversation completed</span></li></ul>
+</div>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-y3">
+  <div class="container">
+    <div class="section-header">
+      <div class="year-badge badge-y3">Year 3</div>
+      <h2>Leadership Expansion</h2>
+      <p class="theme">Move from running programs to leading the system that runs programs. Own a portfolio. Develop people.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,107,.15);">📅</div>
+        <div><h3>Monthly Action Plan</h3><div class="card-sub">One clear action per month — execute sequentially, do not skip.</div></div>
+      </div>
+      <div class="table-wrap"><table>
+<thead><tr><th>Month</th><th>Focus</th><th>Key Action</th></tr></thead><tbody>
+<tr><td class="num">M1</td><td class="y3c">Claim Portfolio Ownership</td><td class="muted">Volunteer to own cross-program dependency map or run VP's quarterly portfolio review</td></tr>
+<tr><td class="num">M2</td><td class="y3c">People Leadership: Identify</td><td class="muted">Identify 1–2 junior PMs or coordinators; propose formal or informal development role</td></tr>
+<tr><td class="num">M3</td><td class="y3c">People Leadership: Begin</td><td class="muted">Hold first monthly 1:1s; set development goal for each person; document plan</td></tr>
+<tr><td class="num">M4</td><td class="y3c">Exec Comms Mastery #1</td><td class="muted">Practice Strategic Program Briefing format in a real leadership presentation</td></tr>
+<tr><td class="num">M5</td><td class="y3c">Exec Comms Mastery #2</td><td class="muted">Deliver Leadership Narrative (5-min format) at a steering committee or all-hands</td></tr>
+<tr><td class="num">M6</td><td class="y3c">Mid-Year Review</td><td class="muted">Score portfolio breadth; assess people leadership progress; get 360 feedback signals</td></tr>
+<tr><td class="num">M7</td><td class="y3c">Org Path Assessment</td><td class="muted">Begin formal assessment: does a Director/VP path exist here in 18 months?</td></tr>
+<tr><td class="num">M8</td><td class="y3c">Exec Comms Mastery #3</td><td class="muted">Prepare and present a board-level 3-slide summary for a real executive audience</td></tr>
+<tr><td class="num">M9</td><td class="y3c">Org Assessment: Conclude</td><td class="muted">Complete assessment with mentor and sponsor input; document decision in writing</td></tr>
+<tr><td class="num">M10</td><td class="y3c">Strategic Move (if needed)</td><td class="muted">If assessment is mostly NO — begin targeted search at companies with defined Dir/VP roles</td></tr>
+<tr><td class="num">M11</td><td class="y3c">Year 4 Channel Select</td><td class="muted">Choose thought leadership channel; draft first content brief or conference proposal</td></tr>
+<tr><td class="num">M12</td><td class="y3c">Year-End Review</td><td class="muted">Compile portfolio scope doc; finalize people leadership outcomes; complete checkpoint</td></tr>
+</tbody></table></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,107,.15);">🗓️</div>
+        <div><h3>Quarterly Milestones</h3><div class="card-sub">Use each quarter-end to check progress before moving forward.</div></div>
+      </div>
+      <div class="four-col"><div class="q-card">
+  <div class="q-label" style="color:var(--y3);">Q1 — Jan to Mar</div>
+  <div class="q-title">Expand Scope</div>
+  <ul class="q-list"><li>Portfolio ownership claimed (formal or de facto)</li>
+<li>People leadership role established with 1–2 reports/mentees</li>
+<li>Development plans drafted for each person</li>
+<li>First executive briefing using structured format</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y3);">Q2 — Apr to Jun</div>
+  <div class="q-title">Lead the System</div>
+  <ul class="q-list"><li>Portfolio: managing interdependencies, not just one program</li>
+<li>People: monthly 1:1s running; first stretch assignments given</li>
+<li>Second executive comms format practiced in a real context</li>
+<li>Mid-year 360 feedback collected</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y3);">Q3 — Jul to Sep</div>
+  <div class="q-title">Strategic Assessment</div>
+  <ul class="q-list"><li>Org path assessment started and evidence gathered</li>
+<li>Third exec comms format (board-level summary) delivered</li>
+<li>Assessment concluded with mentor/sponsor input</li>
+<li>Decision documented: stay or plan strategic move</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y3);">Q4 — Oct to Dec</div>
+  <div class="q-title">Set the Stage for Y4</div>
+  <ul class="q-list"><li>If moving: targeted search started from position of strength</li>
+<li>People leadership: year-end outcomes documented for each mentee</li>
+<li>Thought leadership channel selected for Year 4</li>
+<li>Comp at 75th–80th percentile confirmed or move initiating reset</li></ul>
+</div></div>
+    </div>
+
+    <div class="milestone y3">
+      <div class="milestone-label">💰 Comp Milestone — End of Year 3</div>
+      <h4>75th–80th Percentile, Senior or Principal PM</h4>
+      <p>If executing a strategic lateral move, use the transition to negotiate at or above this band. A move is the single most effective mechanism for a step-change compensation increase. Your new employer is pricing future value — your ask should reflect the Director-track scope you are stepping into.</p>
+    </div>
+
+    <div class="checkpoint">
+  <h4>Annual Review Checkpoint — Year 3</h4>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Complete within 30 days of year-end. Written outputs required.</p>
+  <ul class="checklist"><li><span>Portfolio scope documented — list all programs, teams touched, and interdependencies owned</span></li>
+<li><span>People leadership evidence compiled — development plans, outcomes, mentee feedback</span></li>
+<li><span>360-degree feedback collected from direct reports, peers, and senior stakeholders</span></li>
+<li><span>Organizational path assessment completed with written conclusion and decision documented</span></li>
+<li><span>External network assessed — 3–5 meaningful new relationships confirmed</span></li>
+<li><span>Compensation confirmed at 75th–80th percentile or strategic move plan initiated</span></li>
+<li><span>Year 4 thought leadership channel identified and first content or speaking pitch planned</span></li></ul>
+</div>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-y4">
+  <div class="container">
+    <div class="section-header">
+      <div class="year-badge badge-y4">Year 4</div>
+      <h2>Industry Positioning</h2>
+      <p class="theme">Be known beyond your employer. Build external credibility that makes the Year 5 target role search a pull, not a push.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,217,61,.15);">📅</div>
+        <div><h3>Monthly Action Plan</h3><div class="card-sub">One clear action per month — execute sequentially, do not skip.</div></div>
+      </div>
+      <div class="table-wrap"><table>
+<thead><tr><th>Month</th><th>Focus</th><th>Key Action</th></tr></thead><tbody>
+<tr><td class="num">M1</td><td class="y4c">Launch Thought Leadership Channel</td><td class="muted">Publish first piece OR submit first conference talk proposal; commit to 12-month cadence</td></tr>
+<tr><td class="num">M2</td><td class="y4c">Content #2 Published</td><td class="muted">Publish second piece (LinkedIn series, Substack, or Medium PM publication)</td></tr>
+<tr><td class="num">M3</td><td class="y4c">Conference Speaking: Submit</td><td class="muted">Submit talk proposal to 2–3 sector conferences; apply lessons from past rejections</td></tr>
+<tr><td class="num">M4</td><td class="y4c">External Advisor Role: Research</td><td class="muted">Identify Seed/Series A startups or PMI chapter committees seeking PM advisory</td></tr>
+<tr><td class="num">M5</td><td class="y4c">Content #3 + Network</td><td class="muted">Publish third piece; make 2 new senior external connections through content engagement</td></tr>
+<tr><td class="num">M6</td><td class="y4c">Mid-Year Review</td><td class="muted">Measure thought leadership reach (followers, inbound, speaking invites); adjust niche</td></tr>
+<tr><td class="num">M7</td><td class="y4c">Secure External Role</td><td class="muted">Confirm advisory board seat, PMI committee role, or non-profit board position</td></tr>
+<tr><td class="num">M8</td><td class="y4c">Target Company Research</td><td class="muted">Identify 3–5 companies with funded Director/VP PM roles; map internal connections</td></tr>
+<tr><td class="num">M9</td><td class="y4c">Target Company Outreach</td><td class="muted">Make 1 warm introduction at each target company; add value before any ask</td></tr>
+<tr><td class="num">M10</td><td class="y4c">Conference Talk (if accepted)</td><td class="muted">Deliver conference talk; collect feedback; document for portfolio</td></tr>
+<tr><td class="num">M11</td><td class="y4c">Director Job Description Analysis</td><td class="muted">Pull 10 current Director PM JDs; score yourself; identify final gaps to close</td></tr>
+<tr><td class="num">M12</td><td class="y4c">Year-End Review</td><td class="muted">Measure all thought leadership KPIs; confirm external role; set Year 5 search strategy</td></tr>
+</tbody></table></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,217,61,.15);">🗓️</div>
+        <div><h3>Quarterly Milestones</h3><div class="card-sub">Use each quarter-end to check progress before moving forward.</div></div>
+      </div>
+      <div class="four-col"><div class="q-card">
+  <div class="q-label" style="color:var(--y4);">Q1 — Jan to Mar</div>
+  <div class="q-title">Launch Externally</div>
+  <ul class="q-list"><li>Thought leadership channel launched with first 2 pieces</li>
+<li>Conference talk submitted to at least 2 conferences</li>
+<li>Content niche defined: domain × senior problem × contrarian view</li>
+<li>External advisor opportunity research started</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y4);">Q2 — Apr to Jun</div>
+  <div class="q-title">Build Reach</div>
+  <ul class="q-list"><li>3+ thought leadership pieces published</li>
+<li>Measurable inbound signal (followers, DMs, shares)</li>
+<li>Mid-year reach assessment completed</li>
+<li>External advisor role being actively pursued</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y4);">Q3 — Jul to Sep</div>
+  <div class="q-title">Institutional Credibility</div>
+  <ul class="q-list"><li>External role confirmed (advisory board, committee, or board seat)</li>
+<li>Target company list finalized (3–5 orgs)</li>
+<li>First warm introductions made at 1–2 target companies</li>
+<li>Conference talk delivered or scheduled</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y4);">Q4 — Oct to Dec</div>
+  <div class="q-title">Pre-Search Positioning</div>
+  <ul class="q-list"><li>Director JD gap analysis completed</li>
+<li>Personal narrative updated: 3-minute and written versions</li>
+<li>Target company relationships active at 3+ orgs</li>
+<li>Comp at Director floor confirmed or offer-ready positioning set</li></ul>
+</div></div>
+    </div>
+
+    <div class="milestone y4">
+      <div class="milestone-label">💰 Comp Milestone — End of Year 4</div>
+      <h4>Director Comp Floor</h4>
+      <p>Reach the floor of the Director pay band in your target sector and geography. If you are already at a company with a Director role, this is your internal promotion target. If moving, this is your minimum ask in any offer negotiation. Use Levels.fyi and three direct recruiter data points.</p>
+    </div>
+
+    <div class="checkpoint">
+  <h4>Annual Review Checkpoint — Year 4</h4>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Complete within 30 days of year-end. Written outputs required.</p>
+  <ul class="checklist"><li><span>Thought leadership: at least 5 pieces published, 1 conference talk delivered or accepted</span></li>
+<li><span>External role confirmed and active (advisory board, committee, or non-profit board)</span></li>
+<li><span>Target company relationships: at least 3 warm connections at Director-track orgs</span></li>
+<li><span>Director JD gap analysis completed — final skill gaps documented</span></li>
+<li><span>Personal narrative updated — 3-minute verbal and one-page written versions ready</span></li>
+<li><span>Compensation at Director floor or offer-ready positioning confirmed</span></li></ul>
+</div>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-y5">
+  <div class="container">
+    <div class="section-header">
+      <div class="year-badge badge-y5">Year 5</div>
+      <h2>Target Role</h2>
+      <p class="theme">The search is not an event — it is the culmination of four years of deliberate work. Execute with precision.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(168,230,207,.15);">📅</div>
+        <div><h3>Monthly Action Plan</h3><div class="card-sub">One clear action per month — execute sequentially, do not skip.</div></div>
+      </div>
+      <div class="table-wrap"><table>
+<thead><tr><th>Month</th><th>Focus</th><th>Key Action</th></tr></thead><tbody>
+<tr><td class="num">M1</td><td class="y5c">Define Target Role (Full Specificity)</td><td class="muted">Document exact title, scope, team size, company type, sector, and comp band — in writing</td></tr>
+<tr><td class="num">M2</td><td class="y5c">Activate Search Network</td><td class="muted">Notify mentor, sponsor, and 5 top external peers: you are open to Director/VP conversations</td></tr>
+<tr><td class="num">M3</td><td class="y5c">Resume & LinkedIn Refresh</td><td class="muted">Rewrite resume as Director-level leader; update LinkedIn headline, summary, and featured section</td></tr>
+<tr><td class="num">M4</td><td class="y5c">First Applications / Conversations</td><td class="muted">Apply to or initiate conversations at 3 target companies; use warm introductions where available</td></tr>
+<tr><td class="num">M5</td><td class="y5c">Interview Preparation: Behavioral</td><td class="muted">Prepare STAR stories for leadership, portfolio, conflict, and strategic influence scenarios</td></tr>
+<tr><td class="num">M6</td><td class="y5c">Interview Preparation: Executive</td><td class="muted">Practice 30-60-90 day plan presentation; prepare VP-to-CTO level case discussions</td></tr>
+<tr><td class="num">M7</td><td class="y5c">Active Pipeline: 3+ Conversations</td><td class="muted">Maintain 3+ active Director/VP conversations simultaneously; document each pipeline stage</td></tr>
+<tr><td class="num">M8</td><td class="y5c">Offer Negotiation Prep</td><td class="muted">Research comp bands at each target company; prepare negotiation strategy with mentor</td></tr>
+<tr><td class="num">M9</td><td class="y5c">Closing Conversations</td><td class="muted">Advance 1–2 conversations to offer stage; do not accept first number without counter</td></tr>
+<tr><td class="num">M10</td><td class="y5c">Offer Evaluation</td><td class="muted">Evaluate offers across: scope, comp, equity, team quality, growth path, and culture signals</td></tr>
+<tr><td class="num">M11</td><td class="y5c">Offer Accepted or Promotion Confirmed</td><td class="muted">Accept offer or secure internal promotion; negotiate start terms; plan transition</td></tr>
+<tr><td class="num">M12</td><td class="y5c">New Role Initiated</td><td class="muted">Start in Director/VP role; begin 30-60-90 day plan; initiate next 5-year plan within 90 days</td></tr>
+</tbody></table></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(168,230,207,.15);">🗓️</div>
+        <div><h3>Quarterly Milestones</h3><div class="card-sub">Use each quarter-end to check progress before moving forward.</div></div>
+      </div>
+      <div class="four-col"><div class="q-card">
+  <div class="q-label" style="color:var(--y5);">Q1 — Jan to Mar</div>
+  <div class="q-title">Search Launch</div>
+  <ul class="q-list"><li>Target role defined with full written specificity</li>
+<li>Search network activated — mentor, sponsor, 5+ peers notified</li>
+<li>Resume and LinkedIn updated for Director-level positioning</li>
+<li>First 3 conversations initiated at target companies</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y5);">Q2 — Apr to Jun</div>
+  <div class="q-title">Pipeline Build</div>
+  <ul class="q-list"><li>Behavioral interview stories prepared and practiced</li>
+<li>Executive presentation format rehearsed (30-60-90, case study)</li>
+<li>3+ active Director/VP conversations maintained</li>
+<li>Negotiation strategy prepared with mentor input</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y5);">Q3 — Jul to Sep</div>
+  <div class="q-title">Advance to Offer</div>
+  <ul class="q-list"><li>1–2 conversations at offer stage</li>
+<li>First offer counter-proposed (never accept the first number)</li>
+<li>Offer evaluation framework applied to each opportunity</li>
+<li>Internal promotion track confirmed if staying</li></ul>
+</div>
+<div class="q-card">
+  <div class="q-label" style="color:var(--y5);">Q4 — Oct to Dec</div>
+  <div class="q-title">Land and Launch</div>
+  <ul class="q-list"><li>Offer accepted or internal promotion confirmed</li>
+<li>Director/VP role started with 30-60-90 day plan active</li>
+<li>New 5-year plan initiated within 90 days of start</li>
+<li>Year 5 plan retrospective completed with mentor</li></ul>
+</div></div>
+    </div>
+
+    <div class="milestone y5">
+      <div class="milestone-label">🏆 End Goal — Year 5</div>
+      <h4>Director or VP of Program Management — Accepted Offer or Confirmed Promotion</h4>
+      <p>The plan succeeds when you have a written offer letter or promotion confirmation at the Director or VP level, with compensation at or above the Director/VP market median for your sector and geography. Initiate your next 5-year plan within 90 days of starting in the role.</p>
+    </div>
+
+    <div class="checkpoint">
+  <h4>Annual Review Checkpoint — Year 5</h4>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Complete within 30 days of year-end. Written outputs required.</p>
+  <ul class="checklist"><li><span>Target role defined and documented with full specificity (title, scope, comp band, company type)</span></li>
+<li><span>Director/VP offer accepted or internal promotion confirmed in writing</span></li>
+<li><span>Compensation at or above Director/VP market median for target geography and sector</span></li>
+<li><span>30-60-90 day plan active in the new role</span></li>
+<li><span>Next 5-year growth plan initiated within 90 days of start date</span></li>
+<li><span>Year 5 plan retrospective completed with mentor — lessons documented for future use</span></li></ul>
+</div>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-reference">
+  <div class="container">
+    <div class="section-header">
+      <div class="year-badge badge-ref">Reference</div>
+      <h2>Tools & Frameworks</h2>
+      <p class="theme">Quick-access reference for key frameworks, market data sources, and networking scripts used throughout the plan.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:rgba(108,140,255,.15);">📊</div>
+          <div><h3>Market Data Sources</h3><div class="card-sub">Use all three; take the median of the range.</div></div>
+        </div>
+        <div class="table-wrap" style="margin-bottom:0;">
+          <table>
+            <thead><tr><th>Source</th><th>Best For</th></tr></thead>
+            <tbody>
+              <tr><td>Levels.fyi</td><td class="muted">FAANG and tech companies; total comp breakdown</td></tr>
+              <tr><td>LinkedIn Salary</td><td class="muted">Broad market; geography-specific; role title matching</td></tr>
+              <tr><td>Glassdoor</td><td class="muted">Company-specific ranges; insider data</td></tr>
+              <tr><td>Recruiter conversations</td><td class="muted">Real-time market; highest signal for your exact profile</td></tr>
+              <tr><td>Radford / Mercer (via HR)</td><td class="muted">Enterprise benchmarks; most accurate for large orgs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:rgba(78,205,196,.15);">🏅</div>
+          <div><h3>High-Signal Certifications</h3><div class="card-sub">Choose one. Depth over breadth.</div></div>
+        </div>
+        <div class="table-wrap" style="margin-bottom:0;">
+          <table>
+            <thead><tr><th>Gap</th><th>Certification</th></tr></thead>
+            <tbody>
+              <tr><td class="muted">Agile at scale</td><td>SAFe SPC or SAFe Agilist</td></tr>
+              <tr><td class="muted">Portfolio management</td><td>PgMP (PMI)</td></tr>
+              <tr><td class="muted">Technical fluency</td><td>AWS Cloud Practitioner</td></tr>
+              <tr><td class="muted">Data & analytics</td><td>Google Data Analytics</td></tr>
+              <tr><td class="muted">Strategy & business</td><td>Kellogg Executive PM Program</td></tr>
+              <tr><td class="muted">Gen AI fluency</td><td>Google Cloud Gen AI Leader / Microsoft AI-900</td></tr>
+              <tr><td class="muted">Agentic AI & orchestration</td><td>DeepLearning.AI — AI Agents in LangChain; Coursera Agentic AI Specialization (DeepLearning.AI)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,107,.15);">🔍</div>
+        <div><h3>Skills Gap Audit Domains</h3><div class="card-sub">Score each 1–5 at Month 1. Rescore at every annual review.</div></div>
+      </div>
+      <div class="table-wrap" style="margin-bottom:0;">
+        <table>
+          <thead><tr><th>Domain</th><th>Audit Question</th></tr></thead>
+          <tbody>
+            <tr><td>Technical Fluency</td><td class="muted">Can you read architecture diagrams and hold credible conversations with engineering leads?</td></tr>
+            <tr><td>Portfolio Management</td><td class="muted">Can you manage interdependencies and risk across 5+ concurrent programs simultaneously?</td></tr>
+            <tr><td>Data & Analytics</td><td class="muted">Can you build program health dashboards using SQL, Tableau, Looker, or equivalent?</td></tr>
+            <tr><td>Executive Communication</td><td class="muted">Can you write a one-page strategic briefing a CTO would forward without editing?</td></tr>
+            <tr><td>Financial Acumen</td><td class="muted">Can you build and own a program budget, forecast burn, and calculate ROI?</td></tr>
+            <tr><td>Agile at Scale</td><td class="muted">Can you run a multi-team SAFe PI Planning or comparable scaled agile ceremony?</td></tr>
+            <tr><td>Stakeholder Influence</td><td class="muted">Can you move a resistant VP to a yes without relying on your manager's authority?</td></tr>
+            <tr><td>People Development</td><td class="muted">Have you formally coached a junior PM and documented the measurable outcome?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,217,61,.15);">🎤</div>
+        <div><h3>Thought Leadership Channels</h3><div class="card-sub">Choose one for Year 4. Commit for 12 months.</div></div>
+      </div>
+      <div class="table-wrap" style="margin-bottom:0;">
+        <table>
+          <thead><tr><th>Channel</th><th>Commitment</th><th>Signal Strength</th></tr></thead>
+          <tbody>
+            <tr><td>LinkedIn Series</td><td class="muted">2 posts per week</td><td>High — B2B, hiring, conferences</td></tr>
+            <tr><td>Substack Newsletter</td><td class="muted">2 issues per month</td><td>High — advisory roles, speaking</td></tr>
+            <tr><td>Conference Speaking</td><td class="muted">1–3 talks per year</td><td>Very high — slow to build</td></tr>
+            <tr><td>Podcast (guest or host)</td><td class="muted">1 appearance per month</td><td>Medium-high — network depth</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>AiDE Research &nbsp;·&nbsp; Data as of 2025–2026 &nbsp;·&nbsp; Sources: PMI, Levels.fyi, LinkedIn Salary, Glassdoor, Reforge, HBR</p>
+  <p style="margin-top:6px;">For internal informational use only. Market data is approximate and date-sensitive.</p>
+</footer>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
+    const tab = document.querySelector('.nav-tab[data-tab="' + id + '"]');
+    const section = document.getElementById('tab-' + id);
+    if (tab) tab.classList.add('active');
+    if (section) section.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  document.querySelectorAll('.nav-tab[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  function toggleTheme() {
+    const isLight = document.body.classList.toggle('light');
+    document.querySelector('.theme-toggle').textContent = isLight ? '🌙 Dark' : '☀️ Light';
+  }
+</script>
+</body>
+</html>
