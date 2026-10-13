@@ -42,8 +42,9 @@
     .nav-tab[data-tab="reference"].active { border-color:var(--text-muted); }
     .theme-toggle { margin-left:auto; padding:7px 14px; border-radius:20px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); font-size:13px; cursor:pointer; white-space:nowrap; transition:background .2s,color .2s; flex-shrink:0; }
     .theme-toggle:hover { background:var(--border); }
-    .tab-content { display:none; padding:44px 0 80px; }
-    .tab-content.active { display:block; }
+    .tab-content { display:block; padding:44px 0 80px; }
+    .tabs-ready .tab-content { display:none; }
+    .tabs-ready .tab-content.active { display:block; }
     .section-header { margin-bottom:32px; }
     .year-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; margin-bottom:10px; }
     .badge-y1 { background:rgba(108,140,255,.15); color:var(--y1); }
@@ -102,7 +103,7 @@
     .checklist li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--text-muted); line-height:1.5; }
     .checklist li::before { content:""; width:16px; height:16px; border:2px solid var(--border); border-radius:3px; flex-shrink:0; margin-top:2px; }
     .arc-timeline { display:flex; margin-bottom:28px; border-radius:12px; overflow:hidden; border:1px solid var(--border); }
-    .arc-year { flex:1; padding:18px 12px; text-align:center; border-right:1px solid var(--border); cursor:pointer; transition:background .2s; }
+    .arc-year { display:block; text-decoration:none; color:inherit; flex:1; padding:18px 12px; text-align:center; border-right:1px solid var(--border); cursor:pointer; transition:background .2s; }
     .arc-year:last-child { border-right:none; }
     .arc-year:hover { background:rgba(255,255,255,.03); }
     body.light .arc-year:hover { background:rgba(0,0,0,.03); }
@@ -127,6 +128,9 @@
     .tracker-date { font-size:11px; color:var(--text-dim); white-space:nowrap; margin-top:3px; }
     h4.subhead { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--text-muted); margin-bottom:10px; }
     footer { border-top:1px solid var(--border); padding:32px 24px; text-align:center; font-size:13px; color:var(--text-muted); }
+      .tab-list { display:flex; }
+    :focus-visible { outline:2px solid var(--y1); outline-offset:-3px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition:none !important; } }
   </style>
 </head>
 <body>
@@ -145,6 +149,7 @@
 
 <nav class="nav-bar">
   <div class="nav-inner">
+    <div class="tab-list" role="tablist" aria-label="Career plan sections">
     <button class="nav-tab active" data-tab="overview">Overview</button>
     <button class="nav-tab" data-tab="y1">Year 1 — Skills</button>
     <button class="nav-tab" data-tab="y2">Year 2 — Visibility</button>
@@ -152,7 +157,8 @@
     <button class="nav-tab" data-tab="y4">Year 4 — Positioning</button>
     <button class="nav-tab" data-tab="y5">Year 5 — Target Role</button>
     <button class="nav-tab" data-tab="reference">Reference</button>
-    <button class="theme-toggle" onclick="toggleTheme()">☀️ Light</button>
+    </div>
+    <button class="theme-toggle" type="button">☀️ Light</button>
   </div>
 </nav>
 
@@ -165,21 +171,16 @@
     </div>
 
     <div class="arc-timeline">
-      <div class="arc-year y1" onclick="switchTab('y1')">
-        <div class="yr">Year 1</div><div class="theme-short">Skill Investments</div><div class="title-target">Mid-level PM</div>
-      </div>
-      <div class="arc-year y2" onclick="switchTab('y2')">
-        <div class="yr">Year 2</div><div class="theme-short">Visibility Projects</div><div class="title-target">Senior PM</div>
-      </div>
-      <div class="arc-year y3" onclick="switchTab('y3')">
-        <div class="yr">Year 3</div><div class="theme-short">Leadership Expansion</div><div class="title-target">Senior / Principal PM</div>
-      </div>
-      <div class="arc-year y4" onclick="switchTab('y4')">
-        <div class="yr">Year 4</div><div class="theme-short">Industry Positioning</div><div class="title-target">Director-track</div>
-      </div>
-      <div class="arc-year y5" onclick="switchTab('y5')">
-        <div class="yr">Year 5</div><div class="theme-short">Target Role</div><div class="title-target">Director / VP</div>
-      </div>
+      <a class="arc-year y1" href="#tab-y1" data-year="y1">
+        <div class="yr">Year 1</div><div class="theme-short">Skill Investments</div><div class="title-target">Mid-level PM</div></a>
+      <a class="arc-year y2" href="#tab-y2" data-year="y2">
+        <div class="yr">Year 2</div><div class="theme-short">Visibility Projects</div><div class="title-target">Senior PM</div></a>
+      <a class="arc-year y3" href="#tab-y3" data-year="y3">
+        <div class="yr">Year 3</div><div class="theme-short">Leadership Expansion</div><div class="title-target">Senior / Principal PM</div></a>
+      <a class="arc-year y4" href="#tab-y4" data-year="y4">
+        <div class="yr">Year 4</div><div class="theme-short">Industry Positioning</div><div class="title-target">Director-track</div></a>
+      <a class="arc-year y5" href="#tab-y5" data-year="y5">
+        <div class="yr">Year 5</div><div class="theme-short">Target Role</div><div class="title-target">Director / VP</div></a>
     </div>
 
     <div class="two-col">
@@ -783,24 +784,53 @@
 </footer>
 
 <script>
-  function switchTab(id) {
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
-    const tab = document.querySelector('.nav-tab[data-tab="' + id + '"]');
-    const section = document.getElementById('tab-' + id);
-    if (tab) tab.classList.add('active');
-    if (section) section.classList.add('active');
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  const tabs = [...document.querySelectorAll('.nav-tab[data-tab]')];
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function switchTab(id, focus = false) {
+    const selected = tabs.find(tab => tab.dataset.tab === id);
+    if (!selected) return;
+    tabs.forEach(tab => {
+      const active = tab === selected;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      document.getElementById('tab-' + tab.dataset.tab).classList.toggle('active', active);
+    });
+    if (focus) selected.focus();
   }
-
-  document.querySelectorAll('.nav-tab[data-tab]').forEach(btn => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  tabs.forEach((tab, index) => {
+    const panel = document.getElementById('tab-' + tab.dataset.tab);
+    tab.id = 'nav-' + tab.dataset.tab;
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', panel.id);
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', tab.id);
+    panel.tabIndex = 0;
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    tab.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+      if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = tabs.length - 1;
+      if (next === undefined) return;
+      event.preventDefault();
+      switchTab(tabs[next].dataset.tab, true);
+    });
   });
-
-  function toggleTheme() {
+  document.querySelectorAll('[data-year]').forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      switchTab(link.dataset.year, true);
+      document.querySelector('.nav-bar').scrollIntoView({behavior: motionPreference.matches ? 'instant' : 'smooth'});
+    });
+  });
+  document.querySelector('.theme-toggle').addEventListener('click', event => {
     const isLight = document.body.classList.toggle('light');
-    document.querySelector('.theme-toggle').textContent = isLight ? '🌙 Dark' : '☀️ Light';
-  }
+    event.currentTarget.textContent = isLight ? '\u{1F319} Dark' : '\u2600\uFE0F Light';
+  });
+  switchTab('overview');
+  document.body.classList.add('tabs-ready');
 </script>
 </body>
 </html>

@@ -18,7 +18,7 @@
 <header class="site-header" id="top">
   <nav class="nav container">
     <a href="#top" class="brand">SV<span class="brand-dot">.</span></a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#impact">Impact</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -27,7 +27,7 @@
       <li><a href="5-year-career-growth-plan.html" target="_blank">Career Growth Plan</a></li>
     </ul>
     <a href="#contact" class="btn btn-small btn-primary nav-cta">Book a call</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks" type="button">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -93,27 +93,27 @@
     <h2 class="section-kicker reveal">Impact, in numbers</h2>
     <div class="impact-grid">
       <div class="impact-card reveal spotlight">
-        <div class="impact-number" data-count="20" data-suffix="+">0</div>
+        <div class="impact-number" data-count="20" data-suffix="+">20+</div>
         <div class="impact-label">Years leading engineering &amp; delivery</div>
       </div>
       <div class="impact-card reveal spotlight">
-        <div class="impact-number" data-count="14" data-prefix="$" data-suffix="M">0</div>
+        <div class="impact-number" data-count="14" data-prefix="$" data-suffix="M">$14M</div>
         <div class="impact-label">Portfolio revenue delivered (6 projects, 2 yrs)</div>
       </div>
       <div class="impact-card reveal spotlight">
-        <div class="impact-number" data-count="130" data-suffix="+">0</div>
+        <div class="impact-number" data-count="130" data-suffix="+">130+</div>
         <div class="impact-label">Engineers led across concurrent programs</div>
       </div>
       <div class="impact-card reveal spotlight">
-        <div class="impact-number" data-count="99.9" data-suffix="%">0</div>
+        <div class="impact-number" data-count="99.9" data-suffix="%">99.9%</div>
         <div class="impact-label">Production uptime maintained</div>
       </div>
       <div class="impact-card reveal spotlight">
-        <div class="impact-number" data-count="60" data-suffix="%">0</div>
+        <div class="impact-number" data-count="60" data-suffix="%">60%</div>
         <div class="impact-label">MTTR reduction via PagerDuty &amp; runbook automation</div>
       </div>
       <div class="impact-card reveal spotlight">
-        <div class="impact-number" data-count="40" data-suffix="%">0</div>
+        <div class="impact-number" data-count="40" data-suffix="%">40%</div>
         <div class="impact-label">Productivity gain from process automation</div>
       </div>
     </div>
@@ -346,7 +346,7 @@
             <span class="contact-detail-label">Phone</span>
             +91-9966377798
           </a>
-          <a href="https://linkedin.com/in/sudheer-kumar-veeravalli" target="_blank" rel="noopener" class="contact-detail">
+          <a href="https://www.linkedin.com/in/sudheer-kumar-veeravalli-69944514" target="_blank" rel="noopener" class="contact-detail">
             <span class="contact-detail-label">LinkedIn</span>
             /in/sudheer-kumar-veeravalli ↗
           </a>
@@ -354,15 +354,16 @@
         <a href="assets/Sudheer_Veeravalli_Resume.pdf" class="btn btn-ghost btn-full" download>Download full résumé (PDF) ↓</a>
       </div>
 
-      <form class="contact-form" id="contactForm">
+      <noscript><p>Please <a href="mailto:veersudhir83@gmail.com">email Sudheer directly</a> to discuss your project.</p></noscript>
+      <form class="contact-form" id="contactForm" hidden>
         <p class="form-note">Fill this in and it opens a pre-filled email to Sudheer — no data is stored or sent anywhere else.</p>
         <label>
           Name
-          <input type="text" name="name" required>
+          <input type="text" name="name" autocomplete="name" required>
         </label>
         <label>
           Email
-          <input type="email" name="email" required>
+          <input type="email" name="email" autocomplete="email" required>
         </label>
         <label>
           What are you looking for?
@@ -377,7 +378,7 @@
           Project details
           <textarea name="message" rows="4" required></textarea>
         </label>
-        <button type="submit" class="btn btn-primary btn-full">Send message</button>
+        <button type="submit" class="btn btn-primary btn-full">Open email draft</button>
       </form>
     </div>
   </section>

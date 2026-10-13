@@ -31,13 +31,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Validate site
+        run: |
+          node --check js/main.js
+          python3 scripts/validate_site.py
+      - name: Stage public files
+        run: |
+          mkdir -p dist
+          cp index.html 5-year-career-growth-plan.html dist/
+          cp -R css js assets dist/
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

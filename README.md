@@ -27,15 +27,24 @@ Then visit http://localhost:8000
    git push -u origin main
    ```
 
-2. On GitHub: go to the repo's **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to `Deploy from a branch`.
-4. Choose branch `main` and folder `/ (root)`, then **Save**.
-5. Your site will be live at `https://<your-username>.github.io/my-portfolio/`
-   within a minute or two.
+2. On GitHub, go to **Settings > Pages** and set **Source** to `GitHub Actions`.
+3. The workflow in `.github/workflows/static.yml` validates the site and deploys
+   on pushes to `main`. It publishes only the two HTML pages, CSS, JavaScript,
+   and assets. README, scripts, and task documents are excluded.
+4. Your site will be available at `https://<your-username>.github.io/my-portfolio/`
+   after the workflow completes.
+
+Run the same checks locally:
+
+```bash
+node --check js/main.js
+python scripts/validate_site.py
+```
 
 ### Custom domain (optional)
 
-Add a `CNAME` file at the repo root containing your domain (e.g. `sudheerveeravalli.com`),
+Add a `CNAME` file at the repo root containing your domain (e.g. `sudheerveeravalli.com`)
+and include it in the workflow's staging step,
 then point your domain's DNS to GitHub Pages per
 [GitHub's custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
 
@@ -50,8 +59,8 @@ then point your domain's DNS to GitHub Pages per
 
 ## Contact form
 
-The form currently builds a pre-filled `mailto:` link (no backend, no data stored
-anywhere). If you want real form submissions without opening the visitor's email
+The "Open email draft" button builds a pre-filled `mailto:` link (no backend, no data stored
+anywhere). Without JavaScript, a direct email link replaces the form. If you want real form submissions without opening the visitor's email
 client, wire it up to a service like [Formspree](https://formspree.io) or
 [Web3Forms](https://web3forms.com) — add your endpoint back to the `<form>` tag's
-`action` in `index.html` and remove the `submit` handler in `js/main.js`.
+`action` in `index.html`, remove the `hidden` attribute, and remove the `submit` handler in `js/main.js`.

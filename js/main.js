@@ -1,3 +1,4 @@
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -15,8 +16,19 @@ navLinks.querySelectorAll('a').forEach((link) => {
   });
 });
 
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.focus();
+  }
+});
+
+document.body.classList.add('nav-ready');
+
 // Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && !motionPreference.matches) {
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -28,10 +40,15 @@ const revealObserver = new IntersectionObserver(
   },
   { threshold: 0.15 }
 );
-revealEls.forEach((el) => revealObserver.observe(el));
+revealEls.forEach((el) => {
+  revealObserver.observe(el);
+  el.classList.add('reveal-pending');
+});
+}
 
 // Animated counters
 const countEls = document.querySelectorAll('.impact-number');
+if ('IntersectionObserver' in window && !motionPreference.matches) {
 const countObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -49,7 +66,8 @@ const countObserver = new IntersectionObserver(
         const eased = 1 - Math.pow(1 - progress, 3);
         const value = target * eased;
         el.textContent = prefix + (isDecimal ? value.toFixed(1) : Math.round(value)) + suffix;
-        if (progress < 1) requestAnimationFrame(tick);
+        if (progress < 1 && !motionPreference.matches) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
       }
       requestAnimationFrame(tick);
       countObserver.unobserve(el);
@@ -58,10 +76,11 @@ const countObserver = new IntersectionObserver(
   { threshold: 0.5 }
 );
 countEls.forEach((el) => countObserver.observe(el));
+}
 
 // Spotlight cursor-glow on cards
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.querySelectorAll('.spotlight').forEach((el) => {
+const reduceMotion = motionPreference.matches;
+if (!reduceMotion) document.querySelectorAll('.spotlight').forEach((el) => {
   el.addEventListener('mousemove', (e) => {
     const rect = el.getBoundingClientRect();
     el.style.setProperty('--x', `${e.clientX - rect.left}px`);
@@ -85,6 +104,7 @@ if (timelineEl && !reduceMotion) {
 
 // Contact form -> mailto (no backend/service configured)
 const contactForm = document.getElementById('contactForm');
+contactForm.hidden = false;
 contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const data = new FormData(contactForm);
